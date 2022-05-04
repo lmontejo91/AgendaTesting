@@ -201,35 +201,33 @@ public class TestAgendaDaoArrayList {
     }
     
     @Test
-    public void TestMostrarTrabajadoresEmpresa_CORRECTO_SinTrabajadores(){
+    public void TestMostrarTrabajadoresEmpresa_CORRECTO_SinTrabajadores() throws ContactoNoEncontradoException{
         ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
         dao.crearContactoEmpresa(CE1);
-        dao.mostrarTrabajadoresEmpresa("Google");
-        
-        //COMO COMPROBAR QUE SE ENTRA EN EL isEmpty();
-        
+        assertEquals(null, dao.mostrarTrabajadoresEmpresa("Google")); 
+        /*Comprueba que la llamada al método devuelve un null ya que la lista de 
+        trabajadores de la empresa está vacía.*/        
     }
     
     /*Test para comprobar que se muestran los trabajadores de una empresa correctamente.
     Para poder realizar este test se debió añadir código:
     AgendaDaoArrayList.java --> método mostrarTrabajadoresEmpresa()
-                                líneas 120 a 136.
+                                líneas 120 a 140.
     */
     @Test
-    public void TestMostrarTrabajadoresEmpresa_CORRECTO_ConTrabajadores(){
+    public void TestMostrarTrabajadoresEmpresa_CORRECTO_ConTrabajadores() throws ContactoNoEncontradoException{
         ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
         ContactoPersona CP2 = new ContactoPersona("11221999", "Steve Jobs", "126588983");
         dao.crearContactoPersona(CP1);
         dao.crearContactoPersona(CP2);
-        
+        ArrayList<ContactoPersona> listaTrabajadores=new ArrayList((Arrays.asList(CP1, CP2)));
+          
         ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
         dao.crearContactoEmpresa(CE1);
         CE1.setTrabajadores(new ArrayList<>(Arrays.asList(CP1, CP2)));
         
-        dao.mostrarTrabajadoresEmpresa("Google");
-        
-        //COMO COMPROBAR QUE IMPRIME lista de trabajadores;
-        
+        assertEquals(listaTrabajadores, dao.mostrarTrabajadoresEmpresa("Google"));
+        assertTrue(CE1.getTrabajadores().size()==2);
     }
     
     /*Test para comprobar que cuando el nombre de la empresa introducido no existe 
@@ -238,65 +236,65 @@ public class TestAgendaDaoArrayList {
     AgendaDaoArrayList.java --> método mostrarTrabajadoresEmpresa()
                                 líneas 120 a 136.
     */
-//    @Test(expected = ContactoNoEncontradoException.class)
-//    public void TestMostrarTrabajadoresEmpresa_INCORRECTO(){
-//        dao.mostrarTrabajadoresEmpresa("google");        
-//    }
-//    
-//    @Test
-//    public void TestAnadirTrabajadorAEmpresa_CORRECTO(){
-//        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
-//        ContactoPersona CP2 = new ContactoPersona("11221999", "Steve Jobs", "126588983");
-//        dao.crearContactoPersona(CP1);
-//        dao.crearContactoPersona(CP2);
-//        
-//        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
-//        dao.crearContactoEmpresa(CE1);
-//        
-//        /*Esta parte comprueba que se introducen trabajadores correctamente en la empresa cuando ésta 
-//        no tiene trabajadores --> El programa debería entrar el en IF de la línea 145 de AgendaDaoArrayList.java */
-//        dao.anadirTrabajadorAEmpresa(CE1,CP1);
-//        assertTrue(CE1.getTrabajadores().size()==1);
-//        assertTrue(CE1.getTrabajadores().contains(CP1));
-//        
-//        /*Esta parte comprueba que se introducen trabajadores correctamente en la empresa cuando ya contiene 
-//        trabajadores --> El programa debería saltar directamente a la línea 148 de AgendaDaoArrayList.java */
-//        dao.anadirTrabajadorAEmpresa(CE1,CP2);
-//        assertTrue(CE1.getTrabajadores().size()==2);
-//        assertTrue(CE1.getTrabajadores().contains(CP2));
-//    }   
-//    
-//    /*Comprueba que se lanza una Excepcion cuando el ContactoPersona que se intenta
-//    añadir a la empresa no está en la Agenda.*/
-//    @Test(expected = AssertionError.class)
-//    public void TestAnadirTrabajadorAEmpresa_INCORRECTO01(){  
-//        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
-//        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
-//        dao.crearContactoEmpresa(CE1);
-//        
-//        dao.anadirTrabajadorAEmpresa(CE1,CP1);
-//    }   
-//    
-//    /*Comprueba que se lanza una Excepcion cuando el ContactoEmpresa en el que se intenta 
-//    introducir trabajadores no existe en la Agenda.*/
-//    @Test(expected = NullPointerException.class)
-//    public void TestAnadirTrabajadorAEmpresa_INCORRECTO02(){  
-//        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
-//        dao.crearContactoPersona(CP1);
-//        
-//        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
-//        
-//        dao.anadirTrabajadorAEmpresa(CE1,CP1);
-//    }   
-//    
-//    /*Comprueba que se lanza una Excepcion cuando ambos, ContactoEmpresa y ContactoPersona,
-//    no existen en la Agenda.*/
-//    @Test(expected = NullPointerException.class)
-//    public void TestAnadirTrabajadorAEmpresa_INCORRECTO03(){  
-//        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");     
-//        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
-//        
-//        dao.anadirTrabajadorAEmpresa(CE1,CP1);
-//    } 
-//    
+    @Test(expected = ContactoNoEncontradoException.class)
+    public void TestMostrarTrabajadoresEmpresa_INCORRECTO() throws ContactoNoEncontradoException{
+        dao.mostrarTrabajadoresEmpresa("google");        
+    }
+    
+    @Test
+    public void TestAnadirTrabajadorAEmpresa_CORRECTO() throws ContactoNoEncontradoException{
+        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
+        ContactoPersona CP2 = new ContactoPersona("11221999", "Steve Jobs", "126588983");
+        dao.crearContactoPersona(CP1);
+        dao.crearContactoPersona(CP2);
+        
+        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
+        dao.crearContactoEmpresa(CE1);
+        
+        /*Esta parte comprueba que se introducen trabajadores correctamente en la empresa cuando ésta 
+        no tiene trabajadores --> El programa debería entrar el en IF de la línea 147 de AgendaDaoArrayList.java */
+        dao.anadirTrabajadorAEmpresa(CE1,CP1);
+        assertTrue(CE1.getTrabajadores().size()==1);
+        assertTrue(CE1.getTrabajadores().contains(CP1));
+        
+        /*Esta parte comprueba que se introducen trabajadores correctamente en la empresa cuando ya contiene 
+        trabajadores --> El programa debería saltar directamente a la línea 150 de AgendaDaoArrayList.java */
+        dao.anadirTrabajadorAEmpresa(CE1,CP2);
+        assertTrue(CE1.getTrabajadores().size()==2);
+        assertTrue(CE1.getTrabajadores().contains(CP2));
+    }   
+    
+    /*Comprueba que se lanza una Excepcion cuando el ContactoPersona que se intenta
+    añadir a la empresa no está en la Agenda.*/
+    @Test(expected = ContactoNoEncontradoException.class)
+    public void TestAnadirTrabajadorAEmpresa_INCORRECTO01() throws ContactoNoEncontradoException{  
+        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
+        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
+        dao.crearContactoEmpresa(CE1);
+        
+        dao.anadirTrabajadorAEmpresa(CE1,CP1);
+    }   
+    
+    /*Comprueba que se lanza una Excepcion cuando el ContactoEmpresa en el que se intenta 
+    introducir trabajadores no existe en la Agenda.*/
+    @Test(expected = ContactoNoEncontradoException.class)
+    public void TestAnadirTrabajadorAEmpresa_INCORRECTO02() throws ContactoNoEncontradoException{  
+        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");
+        dao.crearContactoPersona(CP1);
+        
+        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
+        
+        dao.anadirTrabajadorAEmpresa(CE1,CP1);
+    }   
+    
+    /*Comprueba que se lanza una Excepcion cuando ambos, ContactoEmpresa y ContactoPersona,
+    no existen en la Agenda.*/
+    @Test(expected = ContactoNoEncontradoException.class)
+    public void TestAnadirTrabajadorAEmpresa_INCORRECTO03() throws ContactoNoEncontradoException{  
+        ContactoPersona CP1 = new ContactoPersona("11221999", "Bill Gates", "356562883");     
+        ContactoEmpresa CE1 = new ContactoEmpresa("www.google.com", "Google", "123123123");
+        
+        dao.anadirTrabajadorAEmpresa(CE1,CP1);
+    } 
+    
 }

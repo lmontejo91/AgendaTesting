@@ -117,7 +117,7 @@ public class AgendaDaoArrayList implements AgendaDao {
 	}
 
 	@Override
-	public List<ContactoPersona> mostrarTrabajadoresEmpresa(String nombre)  {
+	public List<ContactoPersona> mostrarTrabajadoresEmpresa(String nombre) throws ContactoNoEncontradoException {
             try{
                 Contacto empresa = obtenerContactoPorNombre(nombre);
                 if (empresa instanceof ContactoEmpresa){
@@ -134,7 +134,7 @@ public class AgendaDaoArrayList implements AgendaDao {
                 }else{
                     throw new ContactoNoEncontradoException("El contacto de la empresa inroducido no existe");
                 }
-            }catch(NullPointerException | ContactoNoEncontradoException e){
+            }catch(NullPointerException e){
                 System.out.println(e.getMessage());
                 e.printStackTrace();
                 return null;
@@ -142,12 +142,15 @@ public class AgendaDaoArrayList implements AgendaDao {
 	}
         
         @Override
-        public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp) {
-
-            if (ce.getTrabajadores()==null)
+        public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp) throws ContactoNoEncontradoException{
+            if(contactos.contains(ce) && contactos.contains(cp)){
+                if (ce.getTrabajadores()==null)
                 ce.setTrabajadores(new ArrayList<ContactoPersona>());
         
-            ce.getTrabajadores().add(cp);
+                ce.getTrabajadores().add(cp);
+            }else{
+                throw new ContactoNoEncontradoException("El contacto de la empresa, el de la persona o ambos no existen");
+            }           
 
         }
 

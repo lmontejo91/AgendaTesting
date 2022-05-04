@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="10" failures="0" name="ed.agendatest.daotest.TestAgendaDaoArrayList" time="0" errors="0" skipped="0">
+<testsuite tests="15" failures="0" name="ed.agendatest.daotest.TestAgendaDaoArrayList" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.13+10-LTS-370"/>
@@ -46,7 +46,7 @@
     <property name="java.class.path" value="C:\Program Files\NetBeans-12.5\netbeans\java\maven\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-12.5\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-12.5\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 test"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11.0.13"/>
     <property name="user.language" value="es"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -64,12 +64,17 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
+  <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestAnadirTrabajadorAEmpresa_INCORRECTO01" time="0"/>
+  <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestAnadirTrabajadorAEmpresa_INCORRECTO02" time="0"/>
+  <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestAnadirTrabajadorAEmpresa_INCORRECTO03" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestObtenerContactoPorPosicion_ValorNegativo" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestCrearContactoPersona" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestObtenerContactoPorPosicion_CORRECTO" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestBorrarContactoPorPosicion_CORRECTO" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestObtenerContactoPorPosicion_MayorQueAgenda" time="0"/>
+  <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestMostrarTrabajadoresEmpresa_INCORRECTO" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestMostrarTrabajadoresEmpresa_CORRECTO_ConTrabajadores" time="0"/>
+  <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestAnadirTrabajadorAEmpresa_CORRECTO" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestBorrarContactoPorPosicion_ValorNegativo" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestMostrarTrabajadoresEmpresa_CORRECTO_SinTrabajadores" time="0"/>
   <testcase classname="ed.agendatest.daotest.TestAgendaDaoArrayList" name="TestCrearContactoEmpresa" time="0"/>

@@ -25,7 +25,7 @@ public interface AgendaDao {
         
         public boolean eliminarContactoPorNombre(String nombre) throws ContactoNoEncontradoException;
         
-	public List<ContactoPersona> mostrarTrabajadoresEmpresa(String nombre);
+	public List<ContactoPersona> mostrarTrabajadoresEmpresa(String nombre) throws ContactoNoEncontradoException;
         
-        public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp);
+        public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp) throws ContactoNoEncontradoException;
 }
