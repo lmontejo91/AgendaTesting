@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>agendatest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AgendaTest</a> &gt; <a href="index.source.html" class="el_package">ed.agenda</a> &gt; <span class="el_source">agendatest.java</span></div><h1>agendatest.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ed.agenda;
+
+import ed.agenda.dao.AgendaDao;
+import ed.agenda.dao.AgendaDaoArrayList;
+import ed.agenda.dao.AgendaDaoExcel;
+import ed.agenda.entidades.Contacto;
+import ed.agenda.entidades.ContactoEmpresa;
+import ed.agenda.entidades.ContactoPersona;
+import ed.agenda.excepciones.ContactoNoEncontradoException;
+import ed.agenda.excepciones.PosicionNoEncontradaException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * @author marco
+ */
+<span class="nc" id="L23">public class agendatest {</span>
+
+    public static void main(String[] args) {
+
+<span class="nc" id="L27">        AgendaDao agenda = new AgendaDaoArrayList();</span>
+
+<span class="nc" id="L29">        ContactoPersona CP1 = new ContactoPersona(&quot;11221999&quot;, &quot;Bill Gates&quot;, &quot;356562883&quot;);</span>
+<span class="nc" id="L30">        ContactoPersona CP2 = new ContactoPersona(&quot;11221999&quot;, &quot;Steve Jobs&quot;, &quot;126588983&quot;);</span>
+<span class="nc" id="L31">        ContactoPersona CP3 = new ContactoPersona(&quot;11221999&quot;, &quot;Steve Wozniak&quot;, &quot;126588983&quot;);</span>
+<span class="nc" id="L32">        ContactoEmpresa CE1 = new ContactoEmpresa(&quot;www.google.com&quot;, &quot;Google&quot;, &quot;123123123&quot;);</span>
+<span class="nc" id="L33">        ContactoEmpresa CE2 = new ContactoEmpresa(&quot;www.microsoft.com&quot;, &quot;Microsoft&quot;, &quot;789789987&quot;);</span>
+<span class="nc" id="L34">        ContactoEmpresa CE3 = new ContactoEmpresa(&quot;www.apple.com&quot;, &quot;Apple&quot;, &quot;789789987&quot;);</span>
+<span class="nc" id="L35">        CE1.setTrabajadores(new ArrayList&lt;&gt;(Arrays.asList(CP1)));</span>
+<span class="nc" id="L36">        CE2.setTrabajadores(new ArrayList&lt;&gt;(Arrays.asList(CP2)));</span>
+<span class="nc" id="L37">        CE3.setTrabajadores(new ArrayList&lt;&gt;(Arrays.asList(CP2, CP3)));</span>
+
+<span class="nc" id="L39">        agenda.crearContactoPersona(CP1);</span>
+<span class="nc" id="L40">        agenda.crearContactoPersona(CP2);</span>
+<span class="nc" id="L41">        agenda.crearContactoPersona(CP3);</span>
+<span class="nc" id="L42">        agenda.crearContactoEmpresa(CE1);</span>
+<span class="nc" id="L43">        agenda.crearContactoEmpresa(CE2);</span>
+<span class="nc" id="L44">        agenda.crearContactoEmpresa(CE3);</span>
+
+<span class="nc" id="L46">        Boolean salir = true;</span>
+<span class="nc" id="L47">        Scanner teclado = new Scanner(System.in);</span>
+        String opcion;
+        do {
+<span class="nc" id="L50">            System.out.println(&quot;_________________Mi agenda________________&quot;);</span>
+<span class="nc" id="L51">            System.out.println(&quot;      Escriba el numero de la opción seleccionada&quot;);</span>
+<span class="nc" id="L52">            System.out.println(&quot;a) Imprimir contactos&quot;);</span>
+<span class="nc" id="L53">            System.out.println(&quot;b) Imprimir contacto por posicion&quot;);</span>
+<span class="nc" id="L54">            System.out.println(&quot;c) Añadir Contacto empresa&quot;);</span>
+<span class="nc" id="L55">            System.out.println(&quot;d) Añadir Contacto persona&quot;);</span>
+<span class="nc" id="L56">            System.out.println(&quot;e) Eliminar contacto&quot;);</span>
+<span class="nc" id="L57">            System.out.println(&quot;f) Buscar contacto&quot;);</span>
+<span class="nc" id="L58">            System.out.println(&quot;g) Obtener posición de contacto&quot;);</span>
+<span class="nc" id="L59">            System.out.println(&quot;h) Mostrar trabajadores de una empresa&quot;);</span>
+<span class="nc" id="L60">            System.out.println(&quot;i) Añadir trabajador a empresa&quot;);</span>
+
+<span class="nc" id="L62">            System.out.println(&quot;j) Salir&quot;);</span>
+
+<span class="nc" id="L64">            opcion = teclado.nextLine();</span>
+            String nombre, telefono, pagweb, cumpleanos;
+            Contacto c;
+            
+            try {
+<span class="nc bnc" id="L69" title="All 11 branches missed.">            switch (opcion) {</span>
+
+                case &quot;a&quot;:
+<span class="nc" id="L72">                    agenda.listarContactos();</span>
+<span class="nc" id="L73">                    break;</span>
+                case &quot;b&quot;:
+<span class="nc" id="L75">                    System.out.println(&quot;Escribe posicion del contacto&quot;);</span>
+<span class="nc" id="L76">                    int posicion = teclado.nextInt();</span>
+
+                    try {
+<span class="nc" id="L79">                        Contacto contacto = agenda.obtenerContactoPorPosicion(posicion);</span>
+<span class="nc" id="L80">                        System.out.println(contacto.toString());</span>
+<span class="nc" id="L81">                    } catch (PosicionNoEncontradaException e) {</span>
+<span class="nc" id="L82">                        System.out.println(&quot;No existe la posicion indicada&quot;);</span>
+<span class="nc" id="L83">                    }</span>
+<span class="nc" id="L84">                    break;</span>
+
+                case &quot;c&quot;:
+<span class="nc" id="L87">                    System.out.print(&quot;Escribe nombre empresa: &quot;);</span>
+<span class="nc" id="L88">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L89">                    System.out.print(&quot;Escribe telefono empresa: &quot;);</span>
+<span class="nc" id="L90">                    telefono = teclado.nextLine();</span>
+<span class="nc" id="L91">                    System.out.print(&quot;Escribe pag web empresa: &quot;);</span>
+<span class="nc" id="L92">                    pagweb = teclado.nextLine();</span>
+
+<span class="nc" id="L94">                    ContactoEmpresa cEmpresa = new ContactoEmpresa(pagweb, nombre, opcion);</span>
+<span class="nc" id="L95">                    agenda.crearContactoEmpresa(cEmpresa);</span>
+<span class="nc" id="L96">                    break;</span>
+
+                case &quot;d&quot;:
+<span class="nc" id="L99">                    System.out.print(&quot;Escribe nombre persona: &quot;);</span>
+<span class="nc" id="L100">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L101">                    System.out.print(&quot;Escribe telefono persona: &quot;);</span>
+<span class="nc" id="L102">                    telefono = teclado.nextLine();</span>
+<span class="nc" id="L103">                    System.out.print(&quot;Escribe pag web cumpleaños: &quot;);</span>
+<span class="nc" id="L104">                    cumpleanos = teclado.nextLine();</span>
+
+<span class="nc" id="L106">                    ContactoPersona cPersona = new ContactoPersona(cumpleanos, nombre, telefono);</span>
+<span class="nc" id="L107">                    agenda.crearContactoPersona(cPersona);</span>
+<span class="nc" id="L108">                    break;</span>
+
+                case &quot;e&quot;:
+<span class="nc" id="L111">                    System.out.println(&quot;Escribe el nombre del contacto a eliminar&quot;);</span>
+<span class="nc" id="L112">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L113">                    agenda.eliminarContactoPorNombre(nombre);</span>
+<span class="nc" id="L114">                    break;</span>
+
+                case &quot;f&quot;:
+<span class="nc" id="L117">                    System.out.println(&quot;Escribe el nombre del contacto a buscar&quot;);</span>
+<span class="nc" id="L118">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L119">                    System.err.println(agenda.obtenerContactoPorNombre(nombre).toString());</span>
+
+<span class="nc" id="L121">                    break;</span>
+
+                case &quot;g&quot;:
+<span class="nc" id="L124">                    System.out.println(&quot;Escribe el nombre del contacto a buscar&quot;);</span>
+<span class="nc" id="L125">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L126">                    System.err.println(&quot;El contacto se encuntra en la poscion &quot; + agenda.obtenerContactoPorNombre(nombre));</span>
+
+<span class="nc" id="L128">                    break;</span>
+
+                case &quot;h&quot;:
+<span class="nc" id="L131">                    System.out.println(&quot;Escribe el nombre de la empresa&quot;);</span>
+<span class="nc" id="L132">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L133">                    agenda.mostrarTrabajadoresEmpresa(nombre);</span>
+<span class="nc" id="L134">                    break;</span>
+
+                case &quot;i&quot;:
+<span class="nc" id="L137">                    System.out.println(&quot;Escribe el nombre del trabajador&quot;);</span>
+<span class="nc" id="L138">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L139">                    ContactoPersona trabajador = (ContactoPersona) agenda.obtenerContactoPorNombre(nombre);</span>
+
+<span class="nc" id="L141">                    System.out.println(&quot;Escribe el nombre de la empresa&quot;);</span>
+<span class="nc" id="L142">                    nombre = teclado.nextLine();</span>
+<span class="nc" id="L143">                    ContactoEmpresa empresa = (ContactoEmpresa) agenda.obtenerContactoPorNombre(nombre);</span>
+
+<span class="nc bnc" id="L145" title="All 4 branches missed.">                    if (trabajador == null &amp;&amp; empresa == null) {</span>
+<span class="nc" id="L146">                        System.out.println(&quot;No se ha encontrado el trabajdor o la empresa&quot;);</span>
+                    } else {
+<span class="nc" id="L148">                        empresa.getTrabajadores().add(trabajador);</span>
+                    }
+<span class="nc" id="L150">                    salir = false;</span>
+<span class="nc" id="L151">                    break;</span>
+
+                case &quot;j&quot;:
+<span class="nc" id="L154">                    salir = false;</span>
+                    break;
+            }
+
+            
+<span class="nc" id="L159">            }catch(ContactoNoEncontradoException e){</span>
+<span class="nc" id="L160">                System.out.println(&quot;Contacto no encontrado prueba otra opcion&quot;);</span>
+<span class="nc" id="L161">            }</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        } while (salir);</span>
+<span class="nc" id="L163">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

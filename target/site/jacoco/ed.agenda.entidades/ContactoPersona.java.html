@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ContactoPersona.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AgendaTest</a> &gt; <a href="index.source.html" class="el_package">ed.agenda.entidades</a> &gt; <span class="el_source">ContactoPersona.java</span></div><h1>ContactoPersona.java</h1><pre class="source lang-java linenums">package ed.agenda.entidades;
+
+import java.util.Objects;
+
+/**
+ * Esta clase representa a objetos que son contactos de personas
+ *
+ * @author Marcos
+ */
+public class ContactoPersona extends Contacto {
+
+    private String cumpleanos;
+    private int idEmpresa;
+
+
+    public ContactoPersona(String cumpleanos,
+             String nombre, String telefono) {
+<span class="fc" id="L18">        super(nombre, telefono);</span>
+<span class="fc" id="L19">        this.cumpleanos = cumpleanos;</span>
+        ;
+<span class="fc" id="L21">    }</span>
+
+    public void setCumpleAnos(String cumpleaAnos) {
+<span class="nc" id="L24">        this.cumpleanos = cumpleaAnos;</span>
+<span class="nc" id="L25">    }</span>
+
+    public String getCumpleanos() {
+<span class="nc" id="L28">        return cumpleanos;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L33">        return &quot;Persona{ cumpleaños: &quot; + cumpleanos</span>
+<span class="fc" id="L34">                + &quot; Nombre: &quot; + super.getNombre()</span>
+<span class="fc" id="L35">                + &quot; Telefono: &quot; + super.getTelefono() + '}';</span>
+    }
+
+	public int getIdEmpresa() {
+<span class="nc" id="L39">		return idEmpresa;</span>
+	}
+
+	public void setIdEmpresa(int idEmpresa) {
+<span class="fc" id="L43">		this.idEmpresa = idEmpresa;</span>
+<span class="fc" id="L44">	}</span>
+
+	public void setCumpleanos(String cumpleanos) {
+<span class="nc" id="L47">		this.cumpleanos = cumpleanos;</span>
+<span class="nc" id="L48">	}</span>
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L52">		final int prime = 31;</span>
+<span class="nc" id="L53">		int result = super.hashCode();</span>
+<span class="nc" id="L54">		result = prime * result + Objects.hash(this.getNombre());</span>
+<span class="nc" id="L55">		return result;</span>
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		if (this == obj)</span>
+<span class="fc" id="L61">			return true;</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">		if (!super.equals(obj))</span>
+<span class="fc" id="L63">			return false;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (getClass() != obj.getClass())</span>
+<span class="nc" id="L65">			return false;</span>
+<span class="nc" id="L66">		ContactoPersona other = (ContactoPersona) obj;</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">		return Objects.equals(cumpleanos, other.cumpleanos) &amp;&amp; Objects.equals(idEmpresa, other.idEmpresa);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

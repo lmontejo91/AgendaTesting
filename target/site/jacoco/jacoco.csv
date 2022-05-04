@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+AgendaTest,ed.agenda.excepciones,ContactoNoEncontradoException,23,0,0,0,10,0,5,0,5,0
+AgendaTest,ed.agenda.excepciones,PosicionNoEncontradaException,0,3,0,0,0,1,0,1,0,1
+AgendaTest,ed.agenda.entidades,Contacto,31,58,3,7,8,12,6,7,3,5
+AgendaTest,ed.agenda.entidades,ContactoPersona,62,45,7,3,14,12,9,5,5,4
+AgendaTest,ed.agenda.entidades,ContactoEmpresa,32,85,1,7,7,23,4,10,3,7
+AgendaTest,ed.agenda,agendatest,356,0,17,0,94,0,15,0,2,0
+AgendaTest,ed.agenda.dao,AgendaDaoExcel,174,323,14,18,51,83,19,9,6,6
+AgendaTest,ed.agenda.dao,AgendaDaoArrayList,74,215,13,25,17,48,13,19,4,9

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgendaDaoArrayList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AgendaTest</a> &gt; <a href="index.source.html" class="el_package">ed.agenda.dao</a> &gt; <span class="el_source">AgendaDaoArrayList.java</span></div><h1>AgendaDaoArrayList.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ed.agenda.dao;
+
+import ed.agenda.entidades.Contacto;
+import ed.agenda.entidades.ContactoEmpresa;
+import ed.agenda.entidades.ContactoPersona;
+import ed.agenda.excepciones.ContactoNoEncontradoException;
+import ed.agenda.excepciones.PosicionNoEncontradaException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ *
+ * @author marcos
+ */
+<span class="fc" id="L20">public class AgendaDaoArrayList implements AgendaDao {</span>
+
+	String nomre;
+<span class="fc" id="L23">	static ArrayList&lt;Contacto&gt; contactos = new ArrayList&lt;Contacto&gt;();</span>
+
+	public static ArrayList&lt;Contacto&gt; getContactos() {
+<span class="fc" id="L26">		return contactos;</span>
+	}
+
+	public static void setContactos(ArrayList&lt;Contacto&gt; contactos) {
+<span class="fc" id="L30">		AgendaDaoArrayList.contactos = contactos;</span>
+<span class="fc" id="L31">	}</span>
+
+	@Override
+	public boolean crearContactoPersona(ContactoPersona c) {
+<span class="fc" id="L35">		Pattern pat = Pattern.compile(&quot;[a-zA-Z ]{3,15}&quot;);</span>
+<span class="fc" id="L36">		Matcher mat = pat.matcher(c.getNombre());</span>
+		
+<span class="fc" id="L38">		Pattern pat2 = Pattern.compile(&quot;/\\+34 9[0-9]{1,2} [0-9]{7}/&quot;);</span>
+<span class="fc" id="L39">		Matcher mat2 = pat2.matcher(c.getNombre());</span>
+
+<span class="pc bpc" id="L41" title="1 of 4 branches missed.">		if (!mat.matches() &amp;&amp; !mat2.matches()) {</span>
+<span class="fc" id="L42">			return false;</span>
+		}
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		for (int i = 0; i &lt; contactos.size(); i++) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">			if (contactos.get(i).getNombre().equalsIgnoreCase(c.getNombre())) {</span>
+<span class="fc" id="L47">				return false;</span>
+			}
+		}
+<span class="fc" id="L50">		contactos.add(c);</span>
+<span class="fc" id="L51">		return true;</span>
+	}
+
+	@Override
+	public boolean crearContactoEmpresa(ContactoEmpresa c) {
+<span class="fc" id="L56">		Pattern pat = Pattern.compile(&quot;[a-zA-Z ]{3,20}&quot;);</span>
+<span class="fc" id="L57">		Matcher mat = pat.matcher(c.getNombre());</span>
+		
+<span class="fc" id="L59">		Pattern pat2 = Pattern.compile(&quot;^[w]{3}[\\.][\\w]+([\\.]+[\\w]{2,3})$&quot;);</span>
+                //&quot;^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$&quot;
+<span class="fc" id="L61">		Matcher mat2 = pat.matcher(c.getPagweb());</span>
+<span class="pc bpc" id="L62" title="1 of 4 branches missed.">		if (!mat.matches() &amp;&amp; !mat2.matches()) {</span>
+<span class="fc" id="L63">			return false;</span>
+		}
+		
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		for (int i = 0; i &lt; contactos.size(); i++) {</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">			if (contactos.get(i).getNombre().equalsIgnoreCase(c.getNombre())) {</span>
+<span class="fc" id="L68">				return false;</span>
+			}
+		}
+<span class="fc" id="L71">		contactos.add(c);</span>
+<span class="fc" id="L72">		return true;</span>
+	}
+
+	@Override
+	public boolean borrarContactoPorPosicion(int index) throws PosicionNoEncontradaException {
+<span class="fc bfc" id="L77" title="All 4 branches covered.">		if (index &gt; contactos.size() || index &lt; 0)</span>
+<span class="fc" id="L78">			throw new PosicionNoEncontradaException();</span>
+
+<span class="fc" id="L80">		System.out.println(&quot;Borrado &quot; + contactos.get(index).toString());</span>
+<span class="fc" id="L81">		contactos.remove(index);</span>
+<span class="fc" id="L82">		return false;</span>
+	}
+
+	@Override
+	public Contacto obtenerContactoPorPosicion(int index) {
+<span class="nc" id="L87">		return contactos.get(index);</span>
+	}
+
+	@Override
+	public Contacto obtenerContactoPorNombre(String nombre) {
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">		for (int i = 0; i &lt; contactos.size(); i++) {</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">			if (contactos.get(i).getNombre() ==(nombre)) {</span>
+<span class="fc" id="L94">				System.out.println(&quot;Se encuentra en la posición &quot; + i);</span>
+<span class="fc" id="L95">				return contactos.get(i);</span>
+			}
+		}
+<span class="nc" id="L98">		return null;</span>
+	}
+
+	@Override
+	public void listarContactos() {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		for (int i = 0; i &lt; contactos.size(); i++) {</span>
+<span class="nc" id="L104">			System.out.println(contactos.get(i).toString());</span>
+		}
+<span class="nc" id="L106">	}</span>
+
+	@Override
+	public boolean eliminarContactoPorNombre(String nombre) throws ContactoNoEncontradoException {
+<span class="nc bnc" id="L110" title="All 2 branches missed.">		for (int i = 0; i &lt; contactos.size(); i++) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">			if (contactos.get(i).getNombre().equalsIgnoreCase(nomre)) {</span>
+<span class="nc" id="L112">				contactos.remove(contactos.get(i));</span>
+<span class="nc" id="L113">				return true;</span>
+			}
+		}
+<span class="nc" id="L116">		return false;</span>
+	}
+
+	@Override
+	public List&lt;ContactoPersona&gt; mostrarTrabajadoresEmpresa(String nombre)  {
+            try{
+<span class="fc" id="L122">                Contacto empresa = obtenerContactoPorNombre(nombre);</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                if (empresa instanceof ContactoEmpresa){</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">                    if(((ContactoEmpresa)empresa).getTrabajadores().isEmpty()){</span>
+<span class="nc" id="L125">                        System.out.println(&quot;No hay trabajadores en la empresa&quot;);</span>
+<span class="nc" id="L126">                        return null;</span>
+                    }else{
+<span class="fc" id="L128">                        List&lt;ContactoPersona&gt; trabajadores = new ArrayList&lt;ContactoPersona&gt;();</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">                        for (ContactoPersona trabajador : ((ContactoEmpresa) empresa).getTrabajadores()) {</span>
+<span class="fc" id="L130">                                trabajadores.add(trabajador);</span>
+<span class="fc" id="L131">                        } </span>
+<span class="fc" id="L132">                        return trabajadores;</span>
+                    } 
+                }else{
+<span class="nc" id="L135">                    throw new ContactoNoEncontradoException(&quot;El contacto de la empresa inroducido no existe&quot;);</span>
+                }
+<span class="fc" id="L137">            }catch(NullPointerException | ContactoNoEncontradoException e){</span>
+<span class="fc" id="L138">                System.out.println(e.getMessage());</span>
+<span class="fc" id="L139">                e.printStackTrace();</span>
+<span class="fc" id="L140">                return null;</span>
+            }
+	}
+        
+        @Override
+        public void anadirTrabajadorAEmpresa(ContactoEmpresa ce, ContactoPersona cp) {
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">            if (ce.getTrabajadores()==null)</span>
+<span class="nc" id="L148">                ce.setTrabajadores(new ArrayList&lt;ContactoPersona&gt;());</span>
+        
+<span class="nc" id="L150">            ce.getTrabajadores().add(cp);</span>
+
+<span class="nc" id="L152">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
